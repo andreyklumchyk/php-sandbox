@@ -1,0 +1,9 @@
+/.idea/
+/*.iml
+.DS_Store
+
+/.cache/
+
+/vendor/
+
+/public/version
