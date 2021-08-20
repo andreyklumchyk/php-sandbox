@@ -13,7 +13,7 @@
     ]
   },
   "require-dev": {
-    "composer/composer": "^1.8",
+    "composer/composer": "^1.8"
   },
   "config": {
     "cache-dir": ".cache/composer/"

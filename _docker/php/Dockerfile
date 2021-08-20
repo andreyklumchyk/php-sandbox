@@ -8,11 +8,11 @@ FROM php:7.3-fpm-alpine AS dist
 ARG VERSION
 
 # This is awkward, but required: https://github.com/moby/moby/issues/15858
-COPY conf/ /app/conf/
-COPY public/ /app/public/
-COPY src/ /app/src/
-COPY templates/ /app/templates/
-COPY vendor/ /app/vendor/
+COPY ../../conf/ /app/conf/
+COPY ../../public/ /app/public/
+COPY ../../src/ /app/src/
+COPY ../../templates/ /app/templates/
+COPY ../../vendor/ /app/vendor/
 
 RUN rm -rf /app/vendor/twig/twig/doc \
            /app/vendor/twig/twig/ext \

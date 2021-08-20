@@ -1,7 +1,7 @@
 PHP sandbox
 ===============
 
-Using PHP create a simple Messenger application.
+Using PHP create a simple Chat application.
 
 [Design](https://www.figma.com/****)
 | [Prototype](https://www.figma.com/*****)
