@@ -10,6 +10,9 @@ use \Chat\Http\Request;
  */
 class Page
 {
+    use Util\ClassNameResolver;
+
+
     /**
      * Unique alias of page that identifies it.
      *
@@ -100,28 +103,5 @@ class Page
             $this->toRender = array_merge($this->toRender, $result['toRender']);
         }
         return $this;
-    }
-
-    /**
-     * Returns class name for given class alias or path.
-     * Example:
-     *  "user/pre_posting.pdf" is converted to "User\PrePostingPdf".
-     *
-     * @param string $alias     Alias (or path) of class.
-     *
-     * @return string       Name of Class.
-     */
-    protected static function makeClassName(string $alias): string
-    {
-        if ($alias === '') {
-            return '';
-        }
-        $alias = preg_replace(
-            '/[^a-z_\/\.-]/i', '' , preg_replace(
-            '/^@/', 'Sys_/', trim($alias, '/_.-')
-        ));
-        return implode('\\', array_map(
-            __CLASS__.'::toCamelCase', explode('/', $alias)
-        ));
     }
 }

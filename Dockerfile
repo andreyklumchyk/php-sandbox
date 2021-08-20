@@ -8,11 +8,11 @@ FROM php:7.3-fpm-alpine AS dist
 ARG VERSION
 
 # This is awkward, but required: https://github.com/moby/moby/issues/15858
-COPY ../../conf/ /app/conf/
-COPY ../../public/ /app/public/
-COPY ../../src/ /app/src/
-COPY ../../templates/ /app/templates/
-COPY ../../vendor/ /app/vendor/
+COPY conf/ /app/conf/
+COPY public/ /app/public/
+COPY src/ /app/src/
+COPY templates/ /app/templates/
+COPY vendor/ /app/vendor/
 
 RUN rm -rf /app/vendor/twig/twig/doc \
            /app/vendor/twig/twig/ext \
@@ -43,11 +43,12 @@ RUN apk update \
  && apk add --no-cache --virtual .php-ext-deps \
         libmemcached-libs zlib \
     \
- # TODO: drop
- #&& apk add --no-cache --virtual .pecl-deps \
- #&& apk add --no-cache --virtual .build-deps \
- #       libmemcached-dev zlib-dev \
- #   \
+
+ && apk add --no-cache --virtual .pecl-deps \
+        $PHPIZE_DEPS \
+ && apk add --no-cache --virtual .build-deps \
+        libmemcached-dev zlib-dev \
+    \
  && docker-php-ext-install \
            pdo_mysql \
  && pecl install memcached \
@@ -58,7 +59,7 @@ RUN apk update \
  && rm -rf /var/cache/apk/*
 
 
-COPY rootfs/ /
+COPY _docker/php/rootfs/ /
 
 RUN chmod +x /docker-entrypoint.sh
 
@@ -73,7 +74,7 @@ ENV PHP_SESSION_SERVERS="" \
 
 
 
-WORKDIR /app
+WORKDIR=/app
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 

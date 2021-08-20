@@ -24,7 +24,7 @@ trait Facade
      *
      * @return mixed        Result of method invocation.
      */
-    public static function __callStatic(string $method, mixed[] $args): mixed
+    public static function __callStatic(string $method, $args)
     {
         switch (count($args)) {
         case 0:

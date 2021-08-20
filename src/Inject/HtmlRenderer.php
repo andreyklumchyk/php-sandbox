@@ -26,7 +26,7 @@ trait HtmlRenderer
      *
      * @return Renderer  Initialized instance of HTML renderer.
      */
-    protected function initHtmlRenderer()
+    protected function initHtmlRenderer(): Renderer
     {
         if (!isset($this->HtmlRenderer)) {
             $this->HtmlRenderer = Injector::make('HtmlRenderer');

@@ -39,7 +39,7 @@ class LazyServiceLocator
      *
      * @return mixed    Associated object (or value).
      */
-    public function make(string $alias): mixed
+    public function make(string $alias)
     {
         if (isset($this->instances[$alias])) {
             return $this->instances[$alias];
@@ -77,7 +77,7 @@ class LazyServiceLocator
      * @param string $alias    Alias that should be associated.
      * @param mixed $instance  Value that should be associated.
      */
-    public function bindInstance(string $alias, mixed $instance)
+    public function bindInstance(string $alias, $instance)
     {
         $this->erase($alias);
         $this->instances[$alias] = $instance;

@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  fpm-app:
+    container_name: ${COMPOSE_PROJECT_NAME}-fpm-app
+    image: chat:dev
+    build:
+      context: .
+      args:
+        VERSION: dev
+    depends_on:
+      - memcached
+    environment:
+      PHP_SESSION_SERVERS: memcached:11211
+    volumes:
+      - ./:/app/
+      - ./_dev/conf/:/app/conf/:ro
+    network_mode: service:nginx
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}-nginx
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"          # http
+    volumes:
+      - ./:/var/www/:ro
+      - ./_dev/nginx/app.vhost.conf:/etc/nginx/conf.d/default.conf:ro
+  mysql:
+    container_name: ${COMPOSE_PROJECT_NAME}-mysql
+    image: mysql:5.7
+    volumes:
+      - ./_docker/db/data:/var/lib/mysql
+      - ./_docker/db/init.sql:/docker-entrypoint-initdb.d/dump/init.sql:ro
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_DATABASE: chat
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: qwerty
+  memcached:
+    container_name: ${COMPOSE_PROJECT_NAME}-memcached
+    image: memcached:alpine
+    command: -m 4 -v
+    expose:
+      - "11211"    # memcache

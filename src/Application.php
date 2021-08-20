@@ -24,7 +24,7 @@ class Application
         try {
             $request->parseSuperGlobal();
             $page = Page::create($request->page);
-            $page = $page->process($request, true);
+            $page = $page->process($request);
             $this->initHtmlRenderer()->renderPage($page);
         } catch (\Exception $e) {
             // Users does not must to see Exception - need to do something
@@ -45,21 +45,18 @@ class Application
         Injector::$instance = $injector;
 
         $injector->bindLazySingletons([
-            'MySQL' => function () {
-                return new Core\Storage\MySQL(Conf::$MySQL, 'social');
-            },
-            'Memcached' => function () {
-                return new Core\Storage\Memcached(
-                    Conf::$Memcached['servers'],
-                    Conf::$Memcached['prefix']
-                );
-             },
-           'HtmlRenderer' => function () {
+            'HtmlRenderer' => function () {
                 return new Renderer\Twig(
                     PROJECT_ROOT.'/templates/',
                     Conf::$isDebugMode,
                     PROJECT_ROOT.'/.cache/twig/'
                 );
+            },
+            'Memcached' => function () {
+                throw new \Exception('Not Implemented');
+            },
+            'MySQL' => function () {
+                throw new \Exception('Not Implemented');
             },
         ]);
     }

@@ -15,7 +15,7 @@ class ArrayHelper
      *
      * @return mixed   First array element.
      */
-    public static function reset($array)
+    public static function reset(array $array)
     {
         return reset($array);
     }
@@ -27,7 +27,7 @@ class ArrayHelper
      *
      * @return mixed   Last array element.
      */
-    public static function end($array)
+    public static function end(array $array)
     {
         return end($array);
     }
