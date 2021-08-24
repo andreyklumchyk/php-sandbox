@@ -11,12 +11,11 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
                                 $(findstring $(2),$(1))),1)
 
 
-# Up/Down appliocation
+# Up/Down application
 
-down:
-	docker.down
-up:
-	docker.up
+down: docker.down
+
+up: docker.up
 
 
 # Stop project in Dockerized development environment
@@ -46,8 +45,7 @@ docker.up: docker.down
 # Usage:
 #	make deps [dev=(yes|no)]
 
-deps: \
-	deps.composer
+deps: deps.composer
 
 
 
@@ -120,8 +118,7 @@ endif
 # Usage:
 #	make docs
 
-docs:
-	docs.php
+docs: docs.php
 
 
 
@@ -154,8 +151,7 @@ endif
 # Usage:
 #	make build
 
-build:
-	build.docker
+build: build.docker
 
 
 

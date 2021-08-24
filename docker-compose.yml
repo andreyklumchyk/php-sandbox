@@ -2,7 +2,7 @@ version: '2'
 
 services:
   fpm-app:
-    container_name: ${COMPOSE_PROJECT_NAME}-fpm-app
+    container_name: fpm-app
     image: chat:dev
     build:
       context: .
@@ -17,7 +17,7 @@ services:
       - ./_dev/conf/:/app/conf/:ro
     network_mode: service:nginx
   nginx:
-    container_name: ${COMPOSE_PROJECT_NAME}-nginx
+    container_name: nginx
     image: nginx:stable-alpine
     ports:
       - "80:80"          # http
@@ -25,19 +25,26 @@ services:
       - ./:/var/www/:ro
       - ./_dev/nginx/app.vhost.conf:/etc/nginx/conf.d/default.conf:ro
   mysql:
-    container_name: ${COMPOSE_PROJECT_NAME}-mysql
+    container_name: mysql
     image: mysql:5.7
     volumes:
       - ./_docker/db/data:/var/lib/mysql
-      - ./_docker/db/init.sql:/docker-entrypoint-initdb.d/dump/init.sql:ro
+      - ./_docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
-      MYSQL_DATABASE: chat
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: qwerty
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
   memcached:
-    container_name: ${COMPOSE_PROJECT_NAME}-memcached
+    container_name: memcached
     image: memcached:alpine
     command: -m 4 -v
     expose:
