@@ -13,7 +13,8 @@
     ]
   },
   "require-dev": {
-    "composer/composer": "^1.8"
+    "composer/composer": "^1.8",
+    "kahlan/kahlan": "^4.7"
   },
   "config": {
     "cache-dir": ".cache/composer/"

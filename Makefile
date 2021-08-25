@@ -84,8 +84,7 @@ endif
 # Usage:
 #	make test
 
-test:
-	test.php
+test: test.php
 
 
 
