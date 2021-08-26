@@ -51,6 +51,12 @@ Now your instance of a signaling server can be accessed at `wss://php-sandbox-{{
 
 
 
+### MySQL hosting 
+
+1. register on `freemysqlhosting.net`
+
+
+
 
 ## Releasing
 

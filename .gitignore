@@ -7,3 +7,5 @@
 /vendor/
 
 /public/version
+
+/my.env
