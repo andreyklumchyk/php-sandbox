@@ -25,8 +25,6 @@ RUN find /app/ -name .gitignore -type f -prune | \
 RUN printf "$VERSION" > /app/public/version
 
 
-
-
 #
 # Stage 'runtime' creates final Docker image to use in runtime.
 #

@@ -22,7 +22,7 @@ Using PHP create a simple Chat application.
 
 ## Implementation requirements
 
-1. Code should be documented with [phpdoc] and is able to generate documentation in a form of static website (you may deploy it on [GitHub Pages] as well).   
+1. Code should be documented with [phpdoc] and is able to generate documentation in a form of static website (you may deploy it with site or on [GitHub Pages] as well).   
 2. Code should be covered with unit tests.
 3. [E2E (end-to-end) tests][2] should cover all the required features.
 4. Frontend must work with backend throw [GraphQL]. 
@@ -35,14 +35,14 @@ Using PHP create a simple Chat application.
 
 1. Create account on [Heroku] (if you don't have one).
 2. Copy [Heroku] API key from the [account page][3].
-3. Go to [Actions Secrets][4] settings in your GitHub repository.    ????
+3. Go to [Actions Secrets][4] settings in your GitHub repository.
 4. Add the following repository keys:
     - `HEROKU_API_KEY` - API key which you copied at step 2;
     - `HEROKU_EMAIL` - email with which you registered on [Heroku].
-5. Go to ['Deploy signaling server to Heroku'][5] GitHub workflow.      TODO: change name
+5. Go to ['Deploy to Heroku'][5] GitHub workflow.
 6. Run workflow on `master` branch.
 
-Now your instance of a signaling server can be accessed at `wss://flutter-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
+Now your instance of a signaling server can be accessed at `wss://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
 
 
 ### Example of interaction with server
@@ -394,7 +394,7 @@ Make sure that your IDE supports `.editorconfig` rules applying. For JetBrains I
 [2]: https://www.browserstack.com/guide/end-to-end-testing
 [3]: https://dashboard.heroku.com/account
 [4]: /../../settings/secrets/actions
-[5]: /../../actions/workflows/deploy-server.yml
+[5]: /../../actions/workflows/deploy.yml
 [7]: http://editorconfig.org
 [8]: https://plugins.jetbrains.com/phpStorm/plugin/7294-editorconfig
 [9]: https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates
