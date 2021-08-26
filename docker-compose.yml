@@ -42,7 +42,8 @@ services:
     ports:
       - "8080:80"
     environment:
-      PMA_HOST: sql4.freemysqlhosting.net
+      #PMA_HOST: sql4.freemysqlhosting.net
+      PMA_HOST: mysql-andreyklumchyk.herokuapp.com
   memcached:
     container_name: memcached
     image: memcached:alpine
