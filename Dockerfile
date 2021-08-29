@@ -1,9 +1,9 @@
 #
-# Stage 'dist' creates project distribution.
+# Stage 'php-dist' creates project distribution.
 #
 
 # https://hub.docker.com/_/php
-FROM php:7.3-fpm-alpine AS dist
+FROM php:7.3-fpm-alpine AS php-dist
 
 ARG VERSION
 
@@ -29,51 +29,32 @@ RUN printf "$VERSION" > /app/public/version
 # Stage 'runtime' creates final Docker image to use in runtime.
 #
 
-# https://hub.docker.com/_/php
-FROM php:7.3-fpm-alpine AS runtime
+# https://hub.docker.com/_/scratch
+FROM ubuntu:bionic
 
-# Install required packages and PHP extensions
-RUN apk update \
- && apk upgrade \
- && update-ca-certificates \
- && apk add --no-cache \
-        ssmtp \
- && apk add --no-cache --virtual .php-ext-deps \
-        libmemcached-libs zlib \
-    \
+RUN apt-get update \
+    && apt-get install software-properties-common -y --no-install-recommends \
+    && add-apt-repository ppa:ondrej/php -y
 
- && apk add --no-cache --virtual .pecl-deps \
-        $PHPIZE_DEPS \
- && apk add --no-cache --virtual .build-deps \
-        libmemcached-dev zlib-dev \
-    \
- && docker-php-ext-install \
-           pdo_mysql \
- && pecl install memcached \
- && docker-php-ext-enable \
-           memcached \
-    \
- && apk del .pecl-deps .build-deps \
- && rm -rf /var/cache/apk/*
+RUN apt-get install -y --no-install-recommends \
+    php7.3 \
+    php7.3-fpm \
+    php7.3-mysql \
+    php7.3-mbstring \
+    php-pear \
+    curl \
+    unzip
 
+RUN apt-get -qq install nginx
 
-COPY _docker/php/rootfs/ /
-
+COPY _docker/nginx/rootfs/ /
 RUN chmod +x /docker-entrypoint.sh
 
-
-COPY --from=dist /app/ /app/
-
-RUN chown -R www-data:www-data /app
-
-ENV PHP_SESSION_SERVERS="" \
-    SERVE_AT=/var/www \
-    \
-
-
-
-WORKDIR=/app
+COPY --from=php-dist /app/ /var/www
+RUN chown -R www-data:www-data /var/www
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["php-fpm"]
+CMD ["sh","-c","php-fpm7.3 -D && nginx -g \"daemon off;\""]
+
+EXPOSE 8080

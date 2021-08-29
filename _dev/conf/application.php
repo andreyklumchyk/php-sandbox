@@ -8,8 +8,3 @@ self::$MySQL = [
     'user' => 'admin',
     'pass' => 'qwerty',
 ];
-
-self::$Memcached = [
-    'servers' => ['localhost'],
-    'prefix' => 'chat_',
-];

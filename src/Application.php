@@ -52,9 +52,6 @@ class Application
                     PROJECT_ROOT.'/.cache/twig/'
                 );
             },
-            'Memcached' => function () {
-                throw new \Exception('Not Implemented');
-            },
             'MySQL' => function () {
                 throw new \Exception('Not Implemented');
             },

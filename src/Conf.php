@@ -30,22 +30,6 @@ class Conf
     ];
 
     /**
-     * Contains credentials and settings of memcached server
-     * used by application.
-     *
-     * Each server must be specified in format "<host>[:<port>]".
-     * If no port is specified then port is considered to be default
-     * memcached port.
-     *
-     * @var array
-     */
-    public static $Memcached = [
-        'servers' => ['localhost'],
-        'prefix' => 'chat_',
-    ];
-
-
-    /**
      * Parses external configuration file and overrides configuration
      * parameters that were defined there.
      *
