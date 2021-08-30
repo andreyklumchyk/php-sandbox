@@ -49,9 +49,9 @@ Now your instance of a signaling server can be accessed at `wss://php-sandbox-{{
 
 1. ????
 
-heroku container:push lnmp
-heroku container:release lnmp
-heroku ps:scale lnmp=1
+heroku container:push web
+heroku container:release web
+heroku ps:scale web=1
 
 
 

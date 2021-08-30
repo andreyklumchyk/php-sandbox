@@ -1,4 +1,23 @@
 #
+# Stage 'composer-dist' process composer dependencies.
+#
+
+# https://hub.docker.com/_/composer
+FROM composer:latest AS composer-dist
+
+COPY composer.* /deps/
+
+WORKDIR /deps
+
+RUN bash -c "composer install --no-interaction --no-progress --no-dev --optimize-autoloader"
+
+RUN rm -rf /app/vendor/twig/twig/doc \
+           /app/vendor/twig/twig/ext \
+           /app/vendor/twig/twig/test
+
+
+
+#
 # Stage 'php-dist' creates project distribution.
 #
 
@@ -8,19 +27,11 @@ FROM php:7.3-fpm-alpine AS php-dist
 ARG VERSION
 
 # This is awkward, but required: https://github.com/moby/moby/issues/15858
-COPY conf/ /app/conf/
+COPY _dev/conf/ /app/conf/
 COPY public/ /app/public/
 COPY src/ /app/src/
 COPY templates/ /app/templates/
-COPY vendor/ /app/vendor/
-
-RUN rm -rf /app/vendor/twig/twig/doc \
-           /app/vendor/twig/twig/ext \
-           /app/vendor/twig/twig/test
-RUN find /app/ -name .git -type d -prune | \
-        while read d; do rm -rf $d; done
-RUN find /app/ -name .gitignore -type f -prune | \
-        while read d; do rm -rf $d; done
+COPY --from=composer-dist /deps/vendor/ /app/vendor/
 
 RUN printf "$VERSION" > /app/public/version
 
@@ -40,11 +51,16 @@ RUN apk --no-cache add php7 php7-fpm php7-opcache php7-mysqli php7-json php7-ope
     rm /etc/nginx/conf.d/default.conf
 
 # Configure services
-COPY _docker/rootfs/ /
+COPY --chown=nobody _docker/rootfs/ /
 RUN chmod +x /docker-entrypoint.sh
 
 # Setup document root
 RUN mkdir -p /var/www/app
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+# Expose the port nginx is reachable on
+EXPOSE 8080
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/app && \
@@ -59,10 +75,6 @@ USER nobody
 WORKDIR /var/www/app
 COPY --chown=nobody --from=php-dist /app/ /var/www/app/
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-# Expose the port nginx is reachable on
-EXPOSE 8080
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
