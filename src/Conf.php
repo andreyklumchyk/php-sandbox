@@ -24,7 +24,7 @@ class Conf
      */
     public static $MySQL = [
         'name' => '',
-        'host' => 'localhost',
+        'host' => 'mysql',
         'user' => '',
         'pass' => '',
     ];

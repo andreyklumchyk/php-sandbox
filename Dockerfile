@@ -54,6 +54,7 @@ RUN apk update \
  && apk add --no-cache \
         php7 php7-fpm php7-mysqli php7-json php7-curl \
         php7-zlib php7-mbstring \
+        php-pdo php-pdo_mysql \
  && apk add --no-cache \
         nginx \
         supervisor \
@@ -62,7 +63,7 @@ RUN apk update \
  && rm /etc/nginx/conf.d/default.conf
 
 # Configure services
-COPY --chown=nobody _docker/rootfs/ /
+COPY --chown=nobody _docker/app/rootfs/ /
 RUN chmod +x /docker-entrypoint.sh
 
 # Setup document root

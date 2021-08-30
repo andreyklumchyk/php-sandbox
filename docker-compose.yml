@@ -14,7 +14,10 @@ services:
     ports:
       - "80:8080"
     volumes:
-      - ./:/var/www/app
+      - ./public:/var/www/app/public
+      - ./src:/var/www/app/src
+      - ./templates:/var/www/app/templates
+      - ./vendor:/var/www/app/vendor
       - ./_dev/conf/:/var/www/app/conf/:ro
   mysql:
     container_name: mysql

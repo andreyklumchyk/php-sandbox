@@ -4,7 +4,7 @@ self::$isDebugMode = true;
 
 self::$MySQL = [
     'name' => 'chat',
-    'host' => 'localhost',
-    'user' => 'admin',
+    'host' => 'mysql',
+    'user' => 'root',
     'pass' => 'qwerty',
 ];
