@@ -9,22 +9,22 @@ services:
       args:
         VERSION: dev
     environment:
-      # Must be always 8080 and need only for back compatibility with Heroku
+      # PORT must be always 8080 and need only for back compatibility with Heroku
       PORT: 8080
     ports:
       - "80:8080"
     volumes:
       - ./:/var/www/app
       - ./_dev/conf/:/var/www/app/conf/:ro
-#  mysql:
-#    container_name: mysql
-#    image: mysql:5.7
-#    volumes:
-#      - ./_docker/db/data:/var/lib/mysql
-#      - ./_docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-#    restart: always
-#    environment:
-#      MYSQL_ROOT_PASSWORD: qwerty
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    volumes:
+      - ./_docker/db/data:/var/lib/mysql
+      - ./_docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin
@@ -32,5 +32,5 @@ services:
     ports:
       - "8080:80"
     environment:
-      PMA_HOST: sql4.freemysqlhosting.net
-      #PMA_HOST: mysql-andreyklumchyk.herokuapp.com
+      PMA_HOST: mysql
+      #PMA_HOST: sql4.freemysqlhosting.net

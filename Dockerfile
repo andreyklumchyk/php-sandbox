@@ -36,6 +36,7 @@ COPY --from=composer-dist /deps/vendor/ /app/vendor/
 RUN printf "$VERSION" > /app/public/version
 
 
+
 #
 # Stage 'runtime' creates final Docker image to use in runtime.
 #
@@ -43,12 +44,22 @@ RUN printf "$VERSION" > /app/public/version
 # https://hub.docker.com/_/alpine
 FROM alpine:3.12
 
-# TODO: remove obsolete packages
+# Next part was copied from https://github.com/TrafeX/docker-php-nginx and modified
+# because we need much more custom configuration options and ability to
+# change listening port by Heroku requirements.
+
 # Install packages and remove default server definition
-RUN apk --no-cache add php7 php7-fpm php7-opcache php7-mysqli php7-json php7-openssl php7-curl \
-    php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype php7-session \
-    php7-mbstring php7-gd nginx supervisor curl && \
-    rm /etc/nginx/conf.d/default.conf
+RUN apk update \
+ && apk upgrade \
+ && apk add --no-cache \
+        php7 php7-fpm php7-mysqli php7-json php7-curl \
+        php7-zlib php7-mbstring \
+ && apk add --no-cache \
+        nginx \
+        supervisor \
+        curl \
+ && rm -rf /var/cache/apk/* \
+ && rm /etc/nginx/conf.d/default.conf
 
 # Configure services
 COPY --chown=nobody _docker/rootfs/ /
@@ -62,7 +73,7 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 # Expose the port nginx is reachable on
 EXPOSE 8080
 
-# Make sure files/folders needed by the processes are accessable when they run under the nobody user
+# Make sure files/folders needed by the processes are accessible when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/app && \
   chown -R nobody.nobody /run && \
   chown -R nobody.nobody /var/lib/nginx && \
@@ -74,7 +85,6 @@ USER nobody
 # Add application
 WORKDIR /var/www/app
 COPY --chown=nobody --from=php-dist /app/ /var/www/app/
-
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
