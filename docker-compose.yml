@@ -8,9 +8,8 @@ services:
       context: .
       args:
         VERSION: dev
-    environment:
-      # PORT must be always 8080 and need only for back compatibility with Heroku
-      PORT: 8080
+    env_file:
+      - my.env
     ports:
       - "80:8080"
     volumes:
@@ -36,4 +35,3 @@ services:
       - "8080:80"
     environment:
       PMA_HOST: mysql
-      #PMA_HOST: sql4.freemysqlhosting.net

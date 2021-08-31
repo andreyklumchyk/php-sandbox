@@ -45,7 +45,13 @@ docker.up: docker.down
 # Usage:
 #	make deps [dev=(yes|no)]
 
-deps: deps.composer
+deps: | deps.composer
+ifeq ($(wildcard $(PWD)/public/version),)
+	printf "$(VERSION)" > public/version
+endif
+ifeq ($(wildcard my.env),)
+	cp my.dist.env my.env
+endif
 
 
 

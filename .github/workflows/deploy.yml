@@ -14,7 +14,10 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           heroku_app_name: php-sandbox-${{ github.repository_owner }}
-          mysql_root_password: ""
           usedocker: true
           appdir: "."
-
+        env:
+          HD_CONF_MYSQL_HOST: "sql4.freemysqlhosting.net"
+          HD_CONF_MYSQL_DB: "sql4432980"
+          HD_CONF_MYSQL_USER: "sql4432980"
+          HD_CONF_MYSQL_PASS: "UxHELDasJU"

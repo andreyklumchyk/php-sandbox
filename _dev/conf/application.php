@@ -3,8 +3,8 @@
 self::$isDebugMode = true;
 
 self::$MySQL = [
-    'name' => 'chat',
-    'host' => 'mysql',
-    'user' => 'root',
-    'pass' => 'qwerty',
+    'host' => $_ENV['CONF_MYSQL_HOST'],
+    'name' => $_ENV['CONF_MYSQL_DB'],
+    'user' => $_ENV['CONF_MYSQL_USER'],
+    'pass' => $_ENV['CONF_MYSQL_PASS'],
 ];
