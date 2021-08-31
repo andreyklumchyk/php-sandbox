@@ -18,16 +18,13 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-
-
-#jobs:
-#  test:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: borales/actions-yarn@v2.3.0
-#        with:
-#          cmd: install
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: php-actions/composer@v6
+        with:
+          cmd: make deps dev=yes dockerized=no
 #      - uses: borales/actions-yarn@v2.3.0
 #        with:
 #          cmd: test:unit
