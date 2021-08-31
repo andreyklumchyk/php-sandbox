@@ -22,9 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v6
+      - uses: php-actions/composer@v2
         with:
-          cmd: make deps dev=yes dockerized=no
+          php_version: 7.4
+          dev: yes
+          interaction: no
+          progress: no
+          command: install
+      - run: make deps dev=yes dockerized=no
 #      - uses: borales/actions-yarn@v2.3.0
 #        with:
 #          cmd: test:unit
