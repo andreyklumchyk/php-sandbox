@@ -18,6 +18,6 @@ jobs:
           appdir: "."
         env:
           HD_CONF_MYSQL_HOST: "sql4.freemysqlhosting.net"
-          HD_CONF_MYSQL_DB: "sql4432980"
-          HD_CONF_MYSQL_USER: "sql4432980"
-          HD_CONF_MYSQL_PASS: "UxHELDasJU"
+          HD_CONF_MYSQL_DB: ${{ secrets.MYSQL_USER }}
+          HD_CONF_MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          HD_CONF_MYSQL_PASS: ${{ secrets.MYSQL_PASS }}
