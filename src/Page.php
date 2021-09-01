@@ -64,7 +64,7 @@ class Page
     }
 
     /**
-     * Processes page of Prog application site.
+     * Processes page of Chat application site.
      *
      * @param Request $req       HTTP request to site page.
      *

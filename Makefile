@@ -3,7 +3,7 @@ VERSION ?= $(strip $(shell grep '"version": ' composer.json \
 	| cut -d ':' -f2 | cut -d '"' -f2))
 COMPOSER_VER := "latest"
 KAHLAN_VER := "4.7.6-alpine"
-PHPDOC_VER := "2"
+PHPDOC_VER := "3"
 
 comma := ,
 # Checks two given strings for equality.
@@ -138,17 +138,12 @@ docs: docs.php
 docs.php:
 ifneq ($(dockerized),no)
 	docker run --rm -v "$(PWD)":/app -w /app --entrypoint='' \
-		instrumentisto/phpdoc:$(PHPDOC_VER) \
+		phpdoc/phpdoc:$(PHPDOC_VER) \
 			make docs.php dockerized=no
 else
-	phpdoc -d src/ -t _build/artifacts/rootfs/docs/php/ \
-	       --cache-folder=.cache/phpdoc/ \
-	       --force --no-interaction \
-	       --parseprivate \
-	       --defaultpackagename=Prog \
-	       --title="Chat PHP Documentation" \
-	       --template="zend"
+	phpdoc
 endif
+
 
 
 # Build all project artifacts from sources.

@@ -14,15 +14,22 @@ jobs:
           interaction: no
           progress: no
           command: install
+      - uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: vendor
 
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifacts
       - run: |
-          ls -ls ${{ github.workspace }}
+          ls -lh vendor ${{ github.workspace }}
       - run: make test
 
   docs:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Not implemented"
+      - uses: gpupo/actions-phpDocumentor@1.0
