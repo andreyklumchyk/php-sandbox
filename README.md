@@ -33,29 +33,29 @@ Using PHP create a simple Chat application that could allow for chatting by diff
 2. Set [GitHub Pages] source branch to `gh-pages`
 
 Now your application documentation will be built and published to the [GitHub Pages] automatically on every push to `master` branch.
+    
 
 
-
-### Deploying on [Heroku]
+## Deploying on [Heroku]
 
 1. Registrations
-   1.1. Create account on [freemysqlhosting.net] (if you don't have one).    
-   1.2. Copy credentials received by email.
-   1.3. Using any of MySQL query tools deploy a dump of your database (`_docker/db/init.sql`).
-   1.4. Create account on [Heroku] (if you don't have one).
-   1.5. Copy [Heroku] API key from the [account page][3].
+    1.1. Create account on [freemysqlhosting.net] (if you don't have one).    
+    1.2. Copy credentials received by email.
+    1.3. Using any of MySQL query tools deploy a dump of your local database (`_docker/db/init.sql`) into created one.
+    1.4. Create account on [Heroku] (if you don't have one).
+    1.5. Copy [Heroku] API key from the [account page][3].
 2. Prepare GitHub
-   2.1. Go to [Actions Secrets][4] settings in your GitHub repository.
-   2.2. Add the following repository keys:
-   - `HD_CONF_MYSQL_USER` - MySQL username which you copied at step 1.2;
-   - `HD_CONF_MYSQL_PASS` - MySQL username which you copied at step 1.2;     
-   - `HEROKU_API_KEY` - API key which you copied at step 1.5;
-   - `HEROKU_EMAIL` - email with which you registered on [Heroku].
+    2.1. Go to [Actions Secrets][4] settings in your GitHub repository.
+    2.2. Add the following repository keys:
+        - `HD_CONF_MYSQL_USER` - MySQL username which you copied at step 1.2;
+        - `HD_CONF_MYSQL_PASS` - MySQL username which you copied at step 1.2;     
+        - `HEROKU_API_KEY` - API key which you copied at step 1.5;
+        - `HEROKU_EMAIL` - email with which you registered on [Heroku].
 3. Deploy
-   3.1. Go to ['Deploy to Heroku'][5] GitHub workflow.
-   3.2. Run workflow on `master` branch.
+    3.1. Go to ['Deploy to Heroku'][5] GitHub workflow.
+    3.2. Run workflow on `master` branch.
 
-Now your instance of Chat application can be accessed at `wss://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
+Now your instance of Chat application can be accessed at `https://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
 
 
 
