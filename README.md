@@ -1,7 +1,7 @@
 PHP sandbox
 ===============
 
-Using PHP create a simple Chat application.
+Using PHP create a simple Chat application that could allow for chatting by different accounts.
 
 [Design](https://www.figma.com/****)
 | [Prototype](https://www.figma.com/*****)
@@ -13,10 +13,10 @@ Using PHP create a simple Chat application.
 
 ## Required features
 
-1. Register account.
-2. Send message to another account by name.
-3. List of available chats with other accounts.
-4. Messages history with specified account.
+1. Register account or start chatting only by received link.
+2. Send messages to another account by login.
+3. Show a list of available chats with other accounts.
+4. Show messages history with specified account.
 
 
 
@@ -31,34 +31,35 @@ Using PHP create a simple Chat application.
 
 
 
+## Enable [GitHub Pages] in your repository
+
+1. Go to [Pages][6] settings in your repository
+2. Set [GitHub Pages] source branch to `gh-pages`
+
+Now your application documentation will be built and published to the [GitHub Pages] automatically on every push to `master` branch.
+
+
+
 ### Deploying on [Heroku]
 
-1. Create account on [Heroku] (if you don't have one).
-2. Copy [Heroku] API key from the [account page][3].
-3. Go to [Actions Secrets][4] settings in your GitHub repository.
-4. Add the following repository keys:
-    - `HEROKU_API_KEY` - API key which you copied at step 2;
-    - `HEROKU_EMAIL` - email with which you registered on [Heroku].
-5. Go to ['Deploy to Heroku'][5] GitHub workflow.
-6. Run workflow on `master` branch.
+1. Registrations
+   1.1. Create account on [freemysqlhosting.net] (if you don't have one).    
+   1.2. Copy credentials received by email.
+   1.3. Using any of MySQL query tools deploy a dump of your database (`_docker/db/init.sql`).
+   1.4. Create account on [Heroku] (if you don't have one).
+   1.5. Copy [Heroku] API key from the [account page][3].
+2. Prepare GitHub
+   2.1. Go to [Actions Secrets][4] settings in your GitHub repository.
+   2.2. Add the following repository keys:
+   - `HD_CONF_MYSQL_USER` - MySQL username which you copied at step 1.2;
+   - `HD_CONF_MYSQL_PASS` - MySQL username which you copied at step 1.2;     
+   - `HEROKU_API_KEY` - API key which you copied at step 1.5;
+   - `HEROKU_EMAIL` - email with which you registered on [Heroku].
+3. Deploy
+   3.1. Go to ['Deploy to Heroku'][5] GitHub workflow.
+   3.2. Run workflow on `master` branch.
 
-Now your instance of a signaling server can be accessed at `wss://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
-
-
-### Example of interaction with server
-
-1. ????
-
-heroku container:push web
-heroku container:release web
-heroku ps:scale web=1
-
-
-
-### MySQL hosting 
-
-1. register on `freemysqlhosting.net`
-
+Now your instance of Chat application can be accessed at `wss://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
 
 
 
@@ -78,35 +79,19 @@ CI will build your application and create a release on GitHub automatically.
 
 
 
-
 ## Final demonstration
 
 Once you finish the development, release the application to GitHub as described in the previous section.
 
-Firstly, you should demonstrate that ????. TODO: some demonstration info
+Firstly, you should demonstrate that Chat application is working without registration. Next register two account that they could found each other and chat.
 
 Please, before demonstration make sure that your [Heroku] instance is not [sleeping][10].
-
-
-
-
-## Required assets  TODO: check
-
-All the assets required for this application are located in the `assets/` directory.
-
 
 
 
 ## Final design of application
 
 Final design of the implemented application may vary from the provided one. The provided design aims only to explain the expected result better.
-
-
-
-
-## Useful links   TODO: add some links
-
-- [*****](http://)
 
 
 
@@ -405,6 +390,7 @@ Make sure that your IDE supports `.editorconfig` rules applying. For JetBrains I
 [3]: https://dashboard.heroku.com/account
 [4]: /../../settings/secrets/actions
 [5]: /../../actions/workflows/deploy.yml
+[6]: /../../settings/pages
 [7]: http://editorconfig.org
 [8]: https://plugins.jetbrains.com/phpStorm/plugin/7294-editorconfig
 [9]: https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates
@@ -415,6 +401,7 @@ Make sure that your IDE supports `.editorconfig` rules applying. For JetBrains I
 
 
 [fast-forward]: https://ariya.io/2013/09/fast-forward-git-merge
+[freemysqlhosting.net]: https://freemysqlhosting.net
 [Git]: https://git-scm.com
 [Git-ignored]: https://git-scm.com/docs/gitignore
 [GitHub Pages]: https://pages.github.com/
