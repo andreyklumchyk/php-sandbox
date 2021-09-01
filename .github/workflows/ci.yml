@@ -15,11 +15,11 @@ jobs:
           progress: no
           command: install
 
-  tests:
+  test:
     runs-on: ubuntu-latest
     steps:
-      run: |
-        ls -ls ${{ github.workspace }}
+      - run: |
+          ls -ls ${{ github.workspace }}
       - run: make test
 
   docs:
