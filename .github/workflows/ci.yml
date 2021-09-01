@@ -42,3 +42,8 @@ jobs:
       - uses: gpupo/actions-phpDocumentor@1.0
         with:
           dir: './'
+      - name: To GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: _build/artifacts/rootfs/docs
