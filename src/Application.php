@@ -27,7 +27,7 @@ class Application
             $page = $page->process($request);
             $this->initHtmlRenderer()->renderPage($page);
         } catch (\Exception $e) {
-            // Users does not must to see Exception - need to do something
+            // Users don't must to see Exception - need to do something
             throw $e;
         }
     }

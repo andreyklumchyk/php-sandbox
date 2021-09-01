@@ -4,7 +4,7 @@ namespace Chat\Spec\Renderer;
 
 use \Chat\Router;
 
-//TODO: think about render test
+
 describe('Renderer\Twig', function () {
 
 

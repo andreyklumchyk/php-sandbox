@@ -21,7 +21,7 @@ class Params
      *
      * @param array $params  Array of parameters to create set of.
      */
-    public function __construct($params)
+    public function __construct(array $params)
     {
         $this->params = $params;
     }
@@ -31,7 +31,7 @@ class Params
      *
      * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->params;
     }
@@ -43,7 +43,7 @@ class Params
      *
      * @return bool     Yes or no.
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return isset($this->params[$key]);
     }
@@ -55,7 +55,7 @@ class Params
      *
      * @return string   Space-truncated string representation of parameter.
      */
-    public function String($key)
+    public function String($key): string
     {
         return trim(strval(($this->params[$key])));
     }
@@ -67,7 +67,7 @@ class Params
      *
      * @return int      Integer representation of parameter.
      */
-    public function Int($key)
+    public function Int($key): int
     {
         return intval($this->params[$key]);
     }
@@ -79,7 +79,7 @@ class Params
      *
      * @return bool      Boolean representation of parameter.
      */
-    public function Bool($key)
+    public function Bool($key): bool
     {
         return (bool)$this->params[$key];
     }
@@ -91,7 +91,7 @@ class Params
      *
      * @return array      Array representation of parameter.
      */
-    public function Arr($key)
+    public function Arr($key): array
     {
         return (array)$this->params[$key];
     }

@@ -24,7 +24,7 @@ class Conf
      */
     public static $MySQL = [
         'name' => '',
-        'host' => 'mysql',
+        'host' => '',
         'user' => '',
         'pass' => '',
     ];
@@ -36,7 +36,7 @@ class Conf
      * @param string $file  Relative path (from project root)
      *                      to external configuration file.
      */
-    public static function parseFromFile($file = 'conf/application.php')
+    public static function parseFromFile(string $file = 'conf/application.php')
     {
         if (file_exists($fullPath = PROJECT_ROOT.'/'.$file)) {
             require_once $fullPath;

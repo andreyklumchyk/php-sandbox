@@ -58,7 +58,10 @@ class Request
      *
      * @return $this    Itself for chained calls.
      */
-    public function parse($host = '', $uri = '', $query = [], $request = []) {
+    public function parse(
+        string $host = '', string $uri = '',
+        array $query = [], array $request = []
+    ): self {
         $this->host = $host;
         $this->page = $this->parseUriPath($uri);
         $this->GET = new Params($query);
@@ -71,7 +74,7 @@ class Request
      *
      * @return $this    Itself for chained calls.
      */
-    public function parseSuperGlobal()
+    public function parseSuperGlobal(): self
     {
         return $this->parse(
             $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'], $_GET, $_POST,
@@ -85,7 +88,7 @@ class Request
      *
      * @return string   URI path of HTTP request.
      */
-    public static function parseUriPath($uri)
+    public static function parseUriPath(string $uri): string
     {
         $uriPath = trim(preg_replace('/^\/?~[^\/]*/', '',
             ArrayHelper::reset(explode('?', $uri))

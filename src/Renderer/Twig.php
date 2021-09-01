@@ -36,8 +36,8 @@ class Twig implements Renderer
      *                               cache of Twig templates.
      */
     public function __construct(
-        $templatesPath, $autoReload = false,
-        $cachePath = self::DEFAULT_CACHE_DIR
+        string $templatesPath, bool $autoReload = false,
+        string $cachePath = self::DEFAULT_CACHE_DIR
     ) {
         $cachePath = rtrim($cachePath, '/');
         if (!is_dir($cachePath) && !mkdir($cachePath, 0755, true)) {

@@ -17,7 +17,7 @@ trait ClassNameResolver
      *
      * @return string       Name of Class.
      */
-    protected static function makeClassName($alias)
+    protected static function makeClassName(string $alias): string
     {
         if ($alias === '') {
             return '';
@@ -43,7 +43,7 @@ trait ClassNameResolver
      *
      * @return string   Converted string.
      */
-    protected static function toCamelCase($str)
+    protected static function toCamelCase(string $str): string
     {
         if ($str === '') {
             return '';
