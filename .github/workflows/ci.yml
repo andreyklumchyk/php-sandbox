@@ -39,9 +39,8 @@ jobs:
     #needs: tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: gpupo/actions-phpDocumentor@1.0
-        with:
-          dir: './'
       - name: To GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
