@@ -11,22 +11,10 @@
         <cache>.cache/phpdoc/</cache>
     </paths>
     <version number="3.0.0">
-        <folder>latest</folder>
         <api>
             <source dsn=".">
                 <path>src</path>
             </source>
-            <ignore hidden="true" symlinks="true">
-                <path>_tests/**/*</path>
-                <path>_build/**/*</path>
-                <path>_dev/**/*</path>
-                <path>_docker/**/*</path>
-                <path>templates/**/*</path>
-                <path>vendor/**/*</path>
-            </ignore>
-            <extensions>
-                <extension>php</extension>
-            </extensions>
             <default-package-name>Chat</default-package-name>
         </api>
     </version>

@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
       - uses: php-actions/composer@v6
         with:
           php_version: 7.4
@@ -14,6 +20,7 @@ jobs:
           interaction: no
           progress: no
           command: install
+
       - uses: actions/upload-artifact@v2
         with:
           name: artifacts
@@ -27,15 +34,16 @@ jobs:
         with:
           name: artifacts
       - run: |
-          ls -lh vendor ${{ github.workspace }}
+          ls -lh ${{ github.workspace }}
       - run: make test
 
   docs:
-    needs: deps
+    #needs: tests
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          ls -lh vendor ${{ github.workspace }}
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifacts
       - uses: gpupo/actions-phpDocumentor@1.0
         with:
           dir: './'
