@@ -3,11 +3,7 @@ PHP sandbox
 
 Using PHP create a simple Chat application that could allow for chatting by different accounts.
 
-[Design](https://www.figma.com/****)
-| [Prototype](https://www.figma.com/*****)
-
 > This is a [GitHub template][9] repository, so you need to click on `Use this template` button above and do all the development in your own repository which uses this one as template only.
-
 
 
 
