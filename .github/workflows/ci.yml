@@ -20,6 +20,7 @@ jobs:
           path: vendor
 
   tests:
+    needs: deps
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -30,6 +31,11 @@ jobs:
       - run: make test
 
   docs:
+    needs: deps
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          ls -lh vendor ${{ github.workspace }}
       - uses: gpupo/actions-phpDocumentor@1.0
+        with:
+          dir: './'
