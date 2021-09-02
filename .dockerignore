@@ -1,9 +1,10 @@
-/.idea/
-/*.iml
+.idea/
+.vscode/
+*.iml
 .DS_Store
 
-/.cache/
-/.github/
+.cache/
+.github/
 
-/_tests/
-/_build/
+_tests/
+_build/

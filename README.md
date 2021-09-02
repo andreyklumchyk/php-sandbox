@@ -1,61 +1,66 @@
 PHP sandbox
-===============
+===========
 
-Using PHP create a simple Chat application that could allow for chatting by different accounts.
+Using PHP create a simple сhat application allowing different accounts to chat between each other.
 
 > This is a [GitHub template][9] repository, so you need to click on `Use this template` button above and do all the development in your own repository which uses this one as template only.
 
 
 
+
 ## Required features
 
-1. Register account or start chatting only by received link.
-2. Send messages to another account by login.
-3. Show a list of available chats with other accounts.
-4. Show messages history with specified account.
+1. Account creation or start chatting only by a received link to another account.
+2. Send messages to another account by knowing its login.
+3. Show a list of all started chats with other accounts.
+4. Show messages history in each chat.
+
 
 
 
 ## Implementation requirements
 
-1. Code should be documented with [phpdoc] and is able to generate documentation in a form of static website (you may deploy it with site or on [GitHub Pages] as well).   
+1. Code should be documented with [phpdoc] and be able to generate documentation in a form of static website (you may deploy it either with main site or on [GitHub Pages] as well).   
 2. Code should be covered with unit tests.
 3. [E2E (end-to-end) tests][2] should cover all the required features.
-4. Frontend must work with backend throw [GraphQL]. 
+4. Frontend should interact with backend via [GraphQL] API. 
 5. Backend templates must use [Twig].  
-6. Backend architecture should be [SOLID].  
+6. Backend should follow [SOLID] principles.  
+
 
 
 
 ## Enable [GitHub Pages] in your repository
 
-1. Go to [Pages][6] settings in your repository
-2. Set [GitHub Pages] source branch to `gh-pages`
+1. Go to [Pages][6] settings in your repository.
+2. Set [GitHub Pages] source branch to `gh-pages`.
 
-Now your application documentation will be built and published to the [GitHub Pages] automatically on every push to `master` branch.
-    
+Now, your application documentation will be built and published to the [GitHub Pages] automatically on every push to `master` branch.
+
+
 
 
 ## Deploying on [Heroku]
 
-1. Registrations
-    1.1. Create account on [freemysqlhosting.net] (if you don't have one).    
-    1.2. Copy credentials received by email.
-    1.3. Using any of MySQL query tools deploy a dump of your local database (`_docker/db/init.sql`) into created one.
-    1.4. Create account on [Heroku] (if you don't have one).
+1. Registration:
+    1.1. Create an account on [freemysqlhosting.net] (if you don't have one).    
+    1.2. Copy credentials received via email.
+    1.3. Use any MySQL client to deploy a dump of your local database (`_docker/db/init.sql`) onto the created one.
+    1.4. Create an account on [Heroku] (if you don't have one).
     1.5. Copy [Heroku] API key from the [account page][3].
-2. Prepare GitHub
+2. Prepare GitHub:
     2.1. Go to [Actions Secrets][4] settings in your GitHub repository.
     2.2. Add the following repository keys:
-        - `HD_CONF_MYSQL_USER` - MySQL username which you copied at step 1.2;
-        - `HD_CONF_MYSQL_PASS` - MySQL username which you copied at step 1.2;     
-        - `HEROKU_API_KEY` - API key which you copied at step 1.5;
-        - `HEROKU_EMAIL` - email with which you registered on [Heroku].
-3. Deploy
+        - `HD_CONF_MYSQL_USER` - MySQL username copied at step 1.2;
+        - `HD_CONF_MYSQL_PASS` - MySQL password copied at step 1.2;     
+        - `HEROKU_API_KEY` - API key copied at step 1.5;
+        - `HEROKU_EMAIL` - email address you registered on [Heroku] with.
+3. Deployment:
     3.1. Go to ['Deploy to Heroku'][5] GitHub workflow.
     3.2. Run workflow on `master` branch.
 
-Now your instance of Chat application can be accessed at `https://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
+Now, your instance of a chat application should be accessible at `https://php-sandbox-{{ YOUR GITHUB USERNAME }}.herokuapp.com`.
+
 
 
 
@@ -64,30 +69,31 @@ Now your instance of Chat application can be accessed at `https://php-sandbox-{{
 To release your application run `make release` command.
 
 Or you can do it manually:
-
 ```bash
 $ git tag -d latest
 $ git tag latest
 $ git push origin latest --force 
 ```
 
-CI will build your application and create a release on GitHub automatically.
+CI pipeline will build your application and create a GitHub release automatically.
+
 
 
 
 ## Final demonstration
 
-Once you finish the development, release the application to GitHub as described in the previous section.
+Once you've finished the development, release the application on GitHub as described in the previous section.
 
-Firstly, you should demonstrate that Chat application is working without registration. Next register two account that they could found each other and chat.
+First, you should demonstrate the chat application is working without any registration. Next, register two accounts, so they can find each other and start chatting.
 
-Please, before demonstration make sure that your [Heroku] instance is not [sleeping][10].
+Please, make sure that your [Heroku] instance is not [sleeping][10] before demonstration.
 
 
 
-## Final design of application
 
-Final design of the implemented application may vary from the provided one. The provided design aims only to explain the expected result better.
+## Final architecture of application
+
+Final architecture of the implemented application may vary from the provided one. The provided architecture design aims only to explain the expected result better.
 
 
 
@@ -366,9 +372,11 @@ There are several label groups:
     - `k::toolchain` applies to changes of project toolchain.
 
 
+
+
 ## Code style
 
-All PHP source code must follow [PSR Standards] official recommendations.
+All PHP source code must follow [PSR] official recommendations.
 
 
 ### `.editorconfig` rules
@@ -378,6 +386,8 @@ Project contains [`.editorconfig` file][7] with both general and project-specifi
 __Applying `.editorconfig` rules is mandatory.__
 
 Make sure that your IDE supports `.editorconfig` rules applying. For JetBrains IDE the [EditorConfig plugin][8] may be used.
+
+
 
 
 
@@ -395,15 +405,14 @@ Make sure that your IDE supports `.editorconfig` rules applying. For JetBrains I
 [12]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates#pull-request-templates
 [13]: https://docs.github.com/en/github/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits
 
-
 [fast-forward]: https://ariya.io/2013/09/fast-forward-git-merge
 [freemysqlhosting.net]: https://freemysqlhosting.net
 [Git]: https://git-scm.com
 [Git-ignored]: https://git-scm.com/docs/gitignore
-[GitHub Pages]: https://pages.github.com/
-[GraphQL]: https://graphql.org/
+[GitHub Pages]: https://pages.github.com
+[GraphQL]: https://graphql.org
 [Heroku]: https://www.heroku.com
-[phpdoc]: https://docs.phpdoc.org/
-[PSR Standards]: https://www.php-fig.org/psr/
+[phpdoc]: https://docs.phpdoc.org
+[PSR]: https://www.php-fig.org/psr
 [SOLID]: https://simple.wikipedia.org/wiki/SOLID_(object-oriented_design)
-[Twig]: https://twig.symfony.com/
+[Twig]: https://twig.symfony.com

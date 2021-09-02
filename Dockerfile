@@ -44,8 +44,8 @@ RUN printf "$VERSION" > /app/public/version
 # https://hub.docker.com/_/alpine
 FROM alpine:3.12
 
-# Next part was copied from https://github.com/TrafeX/docker-php-nginx and modified
-# because we need much more custom configuration options and ability to
+# Next part was copied from https://github.com/TrafeX/docker-php-nginx and
+# modified because we need much more custom configuration options and ability to
 # change listening port by Heroku requirements.
 
 # Install packages and remove default server definition
