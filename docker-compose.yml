@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  app:
+    container_name: app
+    image: chat:dev
+    build:
+      context: .
+      args:
+        VERSION: dev
+    env_file:
+      - my.env
+    ports:
+      - "80:8080"
+    volumes:
+      - ./public:/var/www/app/public
+      - ./src:/var/www/app/src
+      - ./templates:/var/www/app/templates
+      - ./vendor:/var/www/app/vendor
+      - ./_dev/conf/:/var/www/app/conf/:ro
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    volumes:
+      - ./_docker/db/data:/var/lib/mysql
+      - ./_docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: always
+    env_file:
+      - my.env
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql

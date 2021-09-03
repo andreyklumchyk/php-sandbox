@@ -1,0 +1,48 @@
+name: CI
+
+on: push
+
+jobs:
+  deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+      - uses: php-actions/composer@v6
+        with:
+          php_version: 7.4
+          dev: yes
+          interaction: no
+          progress: no
+          command: install
+      - uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: vendor
+
+  tests:
+    needs: deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifacts
+      - run: |
+          ls -lh ${{ github.workspace }}
+      - run: make test
+
+  docs:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gpupo/actions-phpDocumentor@1.0
+      - name: To GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: _build/artifacts/rootfs/docs

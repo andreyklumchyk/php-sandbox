@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "require": {
+    "php": ">=7.3",
+    "twig/twig": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chat\\": "src/"
+    },
+    "files": [
+      "src/setup.php"
+    ]
+  },
+  "require-dev": {
+    "composer/composer": "^1.8",
+    "kahlan/kahlan": "^4.7"
+  },
+  "config": {
+    "cache-dir": ".cache/composer/"
+  }
+}

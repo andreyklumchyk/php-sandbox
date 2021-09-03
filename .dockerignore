@@ -1,0 +1,10 @@
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+.cache/
+.github/
+
+_tests/
+_build/

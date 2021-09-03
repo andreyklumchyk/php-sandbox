@@ -1,0 +1,12 @@
+/.idea/
+/.vscode/
+/*.iml
+.DS_Store
+
+/.cache/
+
+/vendor/
+
+/public/version
+
+/my.env
